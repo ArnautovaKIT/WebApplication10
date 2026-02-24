@@ -4,14 +4,14 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string tup { get; set; }
+        public string type { get; set; } 
 
-        public int UNN { get; set; }
-        public int teltfon { get; set; }
+        public int inn { get; set; } 
+        public int phont { get; set; } 
         public string email { get; set; }
-         public string mestoprodagu { get; set; }
+         public string locaciaproduct { get; set; } 
 
-        List<zakazu> zakazus { get; set; }
+        List<Orders> Orderss { get; set; }
             
 
     }

@@ -7,7 +7,7 @@
 
         public int coofizent { get; set; } // Коэффициент типа продукции
         public List<Productmaterialsimport> productmaterialsimports { get; set; }
-        public int zakazuId { get; set; }
-        public zakazu zakazu { get; set; }
+        public int OrdersId { get; set; }
+        public Orders Orderss { get; set; }
     }
 }

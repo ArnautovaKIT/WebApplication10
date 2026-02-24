@@ -1,6 +1,6 @@
 ﻿namespace WebApplication10.model
 {
-    public class zakazu
+    public class Orders
     {
         public int Id { get; set; }
         public List<Producttypeimport> producttypeimports { get; set; }

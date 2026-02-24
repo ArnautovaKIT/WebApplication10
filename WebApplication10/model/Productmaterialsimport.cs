@@ -8,7 +8,7 @@ namespace WebApplication10.model
         public string produczua { get; set; } // Продукция
         public string material { get; set; }// Наименование материала
 
-        public int colmat { get; set; }// Необходимое количество материала
+        public int quantitymaterials { get; set; }// Необходимое количество материала
 
         public int ProducttypeimportId { get; set; }
         public Producttypeimport producttypeimport { get; set; }

@@ -8,8 +8,8 @@
         public string Description { get; set; }
         public  int pasport { get; set; }
         public int recvisitu { get; set; }
-        public string cemqz { get; set; }
-        public string zdorovw { get; set; }
+        public string family { get; set; }
+        public string helth { get; set; }
         List<Productsimport> productsimports = new List<Productsimport>();
          
     }
