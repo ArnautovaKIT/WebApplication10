@@ -11,7 +11,10 @@ namespace WebApplication10.model
         public int min {  get; set; } //  Минимальное количество
         public int package {  get; set; } //Количество в упаковке
          public int MaterId { get; set; }
+        public int MaterialtypeimportId { get; set; }
         public Materialtypeimport Materialtypeimport { get; set; }
-        
+        public int ProductmaterialsimportId { get; set; }
+        public Productmaterialsimport productmaterialsimport { get; set; }
+
     }
 }

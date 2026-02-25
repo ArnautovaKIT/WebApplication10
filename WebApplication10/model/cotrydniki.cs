@@ -10,7 +10,7 @@
         public int recvisitu { get; set; }
         public string family { get; set; }
         public string helth { get; set; }
-        List<Productsimport> productsimports = new List<Productsimport>();
+       public List<Productsimport> productsimport {  get; set; }
          
     }
 }

@@ -11,7 +11,7 @@
         public string email { get; set; }
          public string locaciaproduct { get; set; } 
 
-        List<Orders> Orderss { get; set; }
+        public List<Orders> Orderss { get; set; }  
             
 
     }
