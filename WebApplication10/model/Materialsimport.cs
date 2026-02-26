@@ -5,7 +5,7 @@ namespace WebApplication10.model
     public class Materialsimport
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public int price { get; set; } //Цена единицы материала
         public int quantity { get; set; } // Количество на складе
         public int min {  get; set; } //  Минимальное количество

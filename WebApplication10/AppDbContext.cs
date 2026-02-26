@@ -26,7 +26,7 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Role>(e =>
         {
             e.HasKey(e  => e.Id);
-            e.HasMany(e => e.users).WithOne(p => p.Roles).HasForeignKey(k => k.RoleId);
+            e.HasMany(e => e.users).WithOne(p => p.Role).HasForeignKey(k => k.RoleId);
 
 
         });
