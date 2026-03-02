@@ -2,30 +2,40 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
-builder.Services.AddDbContext<AppDbContext>(op => op.UseNpgsql(config.GetConnectionString("Conect")));
 
-// Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddControllers(); 
+builder.Services.AddDbContext<AppDbContext>(op => op.UseNpgsql(config.GetConnectionString("Conect")));
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication("Cookies")
+    .AddCookie("Cookies", options =>
+    {
+        options.LoginPath = "/login"; // путь куда редиректить неавторизованных
+        options.AccessDeniedPath = "/access-denied";
+    });
 
 var app = builder.Build();
 
-
-
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+foreach (var c in app.Services.GetRequiredService<Microsoft.AspNetCore.Mvc.Infrastructure.IActionDescriptorCollectionProvider>().ActionDescriptors.Items)
+{
+    Console.WriteLine("Route: " + c.AttributeRouteInfo?.Template);
+}
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+app.UseAuthentication();
+app.UseAuthorization();
 
-            app.UseRouting();
+app.UseHttpsRedirection();
+app.UseStaticFiles();
 
-            app.UseAuthorization();
+app.UseRouting();
+app.MapControllers(); 
+app.UseAuthorization();
 
-            app.MapRazorPages();
+app.MapRazorPages();
 
 app.Run();

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication10.Controles
 {
-    [Route("api/[controller]")]
+    [Route("api/product")]
     [ApiController]
     public class Productsimportcontrolller : ControllerBase //это мы делаем
     {
@@ -18,15 +18,15 @@ namespace WebApplication10.Controles
 
 
         // GET: api/<Productsimport>
-        [HttpGet]
+        [HttpGet("get")]
         public ActionResult<IEnumerable<Productsimport>> Get()   // модель 
         {
             var reuslt = _contetx.productsimport.ToList();
             return Ok(reuslt);
         }
 
-        // GET api/<Productsimport>/5
-        [HttpGet("{id}")]
+        // GET api/product/Getid/5
+        [HttpGet("Getid/{id}")]
         public ActionResult Getid(int id)
         {
             var reuslt = _contetx.productsimport.Find(id);
@@ -39,7 +39,7 @@ namespace WebApplication10.Controles
         }
 
         // POST api/<Productsimport>
-        [HttpPost]
+        [HttpPost("Post")]
         public IActionResult Post([FromBody] Productsimport values)
         {
             _contetx.productsimport.Add(values);
@@ -49,7 +49,7 @@ namespace WebApplication10.Controles
         }
 
         // PUT api/<Productsimport>/5 //редактирование данных
-        [HttpPut("{id}")]
+        [HttpPut("Put/{id}")]
         public IActionResult Put(int id, [FromBody] Productsimport value)
         {
             var reuslt = _contetx.productsimport.Find(id);
@@ -65,7 +65,7 @@ namespace WebApplication10.Controles
         }
 
         // DELETE api/<Productsimport>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public IActionResult Delete(int id)
         {
             var reuslt = _contetx.productsimport.Find(id);
