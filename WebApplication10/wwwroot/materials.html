@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Materials</title>
+</head>
+
+<body>
+
+    <h2>Materials</h2>
+
+    <button onclick="loadMaterials()">Load Materials</button>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Min</th>
+                <th>Package</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody id="materialsTable"></tbody>
+    </table>
+
+    <hr>
+
+    <h3>Add / Edit Material</h3>
+
+    <input id="id" placeholder="Id (for update)">
+    <br>
+
+    <input id="name" placeholder="Name">
+    <br>
+
+    <input id="price" placeholder="Price">
+    <br>
+
+    <input id="quantity" placeholder="Quantity">
+    <br>
+
+    <input id="min" placeholder="Min quantity">
+    <br>
+
+    <input id="package" placeholder="Package">
+    <br>
+
+    <input id="MaterId" placeholder="MaterId">
+    <br>
+
+    <input id="MaterialtypeimportId" placeholder="MaterialTypeId">
+    <br>
+
+    <input id="ProductmaterialsimportId" placeholder="ProductMaterialId">
+    <br><br>
+
+    <button onclick="addMaterial()">Add</button>
+    <button onclick="updateMaterial()">Update</button>
+
+    <hr>
+
+    <input id="deleteId" placeholder="Id to delete">
+    <button onclick="deleteMaterial()">Delete</button>
+
+    <script>
+
+        const api = "https://localhost:7026/api/Materialsimport";
+
+        async function loadMaterials() {
+
+            const response = await fetch(api);
+            const data = await response.json();
+
+            let rows = "";
+
+            data.forEach(m => {
+
+                rows += `
+                <tr>
+                    <td>${m.id}</td>
+                    <td>${m.name}</td>
+                    <td>${m.price}</td>
+                    <td>${m.quantity}</td>
+                    <td>${m.min}</td>
+                    <td>${m.package}</td>
+                    <td>
+                        <button onclick="editMaterial(${m.id})">Edit</button>
+                    </td>
+                </tr>
+                `;
+            });
+
+            document.getElementById("materialsTable").innerHTML = rows;
+        }
+
+        async function addMaterial() {
+
+            const material = {
+
+                name: document.getElementById("name").value,
+                price: parseInt(document.getElementById("price").value),
+                quantity: parseInt(document.getElementById("quantity").value),
+                min: parseInt(document.getElementById("min").value),
+                package: parseInt(document.getElementById("package").value),
+                materId: parseInt(document.getElementById("MaterId").value),
+                materialtypeimportId: parseInt(document.getElementById("MaterialtypeimportId").value),
+                productmaterialsimportId: parseInt(document.getElementById("ProductmaterialsimportId").value)
+
+            };
+
+            await fetch(api, {
+
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(material)
+
+            });
+
+            loadMaterials();
+        }
+
+        async function updateMaterial() {
+
+            const id = document.getElementById("id").value;
+
+            const material = {
+
+                id: parseInt(id),
+                name: document.getElementById("name").value,
+                price: parseInt(document.getElementById("price").value),
+                quantity: parseInt(document.getElementById("quantity").value),
+                min: parseInt(document.getElementById("min").value),
+                package: parseInt(document.getElementById("package").value),
+                materId: parseInt(document.getElementById("MaterId").value),
+                materialtypeimportId: parseInt(document.getElementById("MaterialtypeimportId").value),
+                productmaterialsimportId: parseInt(document.getElementById("ProductmaterialsimportId").value)
+
+            };
+
+            await fetch(api + "/" + id, {
+
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(material)
+
+            });
+
+            loadMaterials();
+        }
+
+        async function deleteMaterial() {
+
+            const id = document.getElementById("deleteId").value;
+
+            await fetch(api + "/" + id, {
+                method: "DELETE"
+            });
+
+            loadMaterials();
+        }
+
+        async function editMaterial(id) {
+
+            const response = await fetch(api + "/" + id);
+            const m = await response.json();
+
+            document.getElementById("id").value = m.id;
+            document.getElementById("name").value = m.name;
+            document.getElementById("price").value = m.price;
+            document.getElementById("quantity").value = m.quantity;
+            document.getElementById("min").value = m.min;
+            document.getElementById("package").value = m.package;
+            document.getElementById("MaterId").value = m.materId;
+            document.getElementById("MaterialtypeimportId").value = m.materialtypeimportId;
+            document.getElementById("ProductmaterialsimportId").value = m.productmaterialsimportId;
+        }
+
+        loadMaterials();
+
+    </script>
+
+</body>
+</html>

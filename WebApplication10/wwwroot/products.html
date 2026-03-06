@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Products</title>
+</head>
+
+<body>
+
+    <h2>Products</h2> 
+    
+    <button onclick="loadProducts()">Load Products</button>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Articul</th>
+                <th>Price</th>
+                <th>Width</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody id="productsTable"></tbody>
+    </table>
+
+    <hr>
+
+    <h3>Add / Edit Product</h3>
+
+    <input id="id" type="number" placeholder="Id (for update)">
+    <br>
+
+    <input id="typeproduct" placeholder="Type">
+    <br>
+
+    <input id="name" placeholder="Name">
+    <br>
+
+    <input id="articul" placeholder="Articul">
+    <br>
+
+    <input id="prise" placeholder="Price">
+    <br>
+
+    <input id="width" placeholder="Width">
+    <br><br>
+
+    <button onclick="addProduct()">Add</button>
+    <button onclick="updateProduct()">Update</button>
+
+    <hr>
+
+    <input id="deleteId" placeholder="Id to delete">
+    <button onclick="deleteProduct()">Delete</button>
+
+    <script>
+
+        const api = "https://localhost:7011/api/product";
+
+        async function loadProducts() {
+
+            const response = await fetch(api + "/get");
+            const data = await response.json();
+
+            let rows = "";
+
+            data.forEach(p => {
+
+                rows += `
+                <tr>
+                    <td>${p.id}</td>
+                    <td>${p.typeproduct}</td>
+                    <td>${p.name}</td>
+                    <td>${p.articul}</td>
+                    <td>${p.prise}</td>
+                    <td>${p.width}</td>
+                    <td>
+                        <button onclick="editProduct(${p.id})">Edit</button>
+                    </td>
+                </tr>
+                `;
+
+            });
+
+            document.getElementById("productsTable").innerHTML = rows;
+        }
+
+        async function addProduct() {
+
+            const product = {
+
+                typeproduct: document.getElementById("typeproduct").value,
+                name: document.getElementById("name").value,
+                articul: parseInt(document.getElementById("articul").value),
+                prise: parseInt(document.getElementById("prise").value),
+                width: parseInt(document.getElementById("width").value)
+
+            };
+
+            await fetch(api + "/Post", {
+
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(product)
+
+            });
+
+            loadProducts();
+        }
+
+        async function updateProduct() {
+
+            const id = document.getElementById("id").value;
+
+            const product = {
+
+                id: parseInt(id),
+                typeproduct: document.getElementById("typeproduct").value,
+                name: document.getElementById("name").value,
+                articul: parseInt(document.getElementById("articul").value),
+                prise: parseInt(document.getElementById("prise").value),
+                width: parseInt(document.getElementById("width").value)
+
+            };
+
+            await fetch(api + "/Put/" + id, {
+
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(product)
+
+            });
+
+            loadProducts();
+        }
+
+        async function deleteProduct() {
+
+            const id = document.getElementById("deleteId").value;
+
+            await fetch(api + "/Delete/" + id, {
+                method: "DELETE"
+            });
+
+            loadProducts();
+        }
+
+        async function editProduct(id) {
+
+            const response = await fetch(api + "/Getid/" + id);
+            const p = await response.json();
+
+            document.getElementById("id").value = p.id;
+            document.getElementById("typeproduct").value = p.typeproduct;
+            document.getElementById("name").value = p.name;
+            document.getElementById("articul").value = p.articul;
+            document.getElementById("prise").value = p.prise;
+            document.getElementById("width").value = p.width;
+        }
+
+        loadProducts();
+
+    </script>
+
+</body>
+</html>
