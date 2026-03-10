@@ -3,6 +3,144 @@
 <head>
     <meta charset="utf-8">
     <title>Products</title>
+    <style>
+        body {
+            font-family: 'Gabriola', serif;
+            background-color: #FFFFFF;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        /* Шапка с логотипом */
+        .header {
+            display: flex;
+            align-items: center;
+            background-color: #BBD9B2;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+            margin-right: 20px;
+        }
+
+        .header h1 {
+            color: #2D6033;
+            font-size: 2.2em;
+            margin: 0;
+        }
+
+        /* Заголовки разделов */
+        h2, h3 {
+            color: #2D6033;
+            font-size: 1.8em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        /* Таблица */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        th {
+            background-color: #BBD9B2;
+            color: #2D6033;
+            font-size: 1.2em;
+            padding: 12px 8px;
+            text-align: left;
+        }
+
+        td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #BBD9B2;
+        }
+
+        tbody tr:hover {
+            background-color: #f0f7ee;
+        }
+
+        /* Поля ввода и select */
+        input, select {
+            font-family: 'Gabriola', serif;
+            font-size: 1.1em;
+            padding: 8px 12px;
+            border: 1px solid #BBD9B2;
+            border-radius: 5px;
+            width: 300px;
+            max-width: 100%;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+            input:focus, select:focus {
+                outline: none;
+                border-color: #2D6033;
+                box-shadow: 0 0 5px rgba(45,96,51,0.3);
+            }
+
+        /* Кнопки */
+        button {
+            font-family: 'Gabriola', serif;
+            font-size: 1.1em;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #2D6033;
+            color: white;
+            transition: background-color 0.2s;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+            button:hover {
+                background-color: #1e4422;
+            }
+
+        /* Специально для кнопок действий в таблице (если будут) */
+        .action-btn {
+            background-color: #BBD9B2;
+            color: #2D6033;
+            margin-right: 5px;
+            padding: 5px 10px;
+        }
+
+            .action-btn:hover {
+                background-color: #a8c69f;
+            }
+
+        /* Горизонтальный разделитель */
+        hr {
+            border: none;
+            height: 2px;
+            background-color: #BBD9B2;
+            margin: 30px 0;
+        }
+
+        /* Контейнер для полей */
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        /* Для inline-блоков (если нужно) */
+        .inline {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+    </style>
 </head>
 
 <body>
